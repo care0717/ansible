@@ -2,7 +2,7 @@
 
 - hosts: local-server
   become: yes
-  become_user: root
+  become_user: asai
   vars:
     apps:
       - python
@@ -10,12 +10,15 @@
       - git
       - zsh
   tasks:
-    - command: cp -r ~/ansible/.emacs.d ~/
-    - command: cp ~/ansible/.zshrc ~/
     - name: be sure app is installed
       apt: name={{ item }} state=installed
       with_items: "{{ apps }}"
-    - git: repo=https://github.com/longld/peda.git dest=~/peda version=master 
+    - git: repo=https://github.com/longld/peda.git dest=~/peda version=master
     - name: "install peda"
-      command: echo "source ~/peda/peda.py" >> ~/.gdbinit
+      command: echo "source ~/peda/peda.py" > ~/.gdbinit
     - git: repo=https://github.com/zsh-users/zsh-autosuggestions dest=~/.zsh/zsh-autosuggestions
+    - git: repo=https://github.com/care0717/ansible.git/ dest=~/ansible
+    - command: cp -r ~/ansible/.emacs.d ~/
+    - command: cp ~/ansible/.zshrc ~/
+    - name: "gets rp++"
+      get_url: url=https://github.com/downloads/0vercl0k/rp/rp-lin-x64 dest=~/Desktop

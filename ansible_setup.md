@@ -17,6 +17,6 @@ localhost
 ```
 `ansible local-server -a "cat /etc/hosts"`で好きなコマンドを打てる
 
-`ansible-playbook simple.yml --ask-become-pass`でyml実行
+`ansible-playbook start.yml --ask-become-pass`でyml実行
 
-
+`chsh`は手動
